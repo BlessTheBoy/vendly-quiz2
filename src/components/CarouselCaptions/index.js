@@ -1,8 +1,8 @@
-function CarouselCaptions() {
+import "./style.css";
+
+function CarouselCaptions({captions, activeIndex}) {
     return (
-        <div>
-            
-        </div>
+        <p className="carouselCaption">{captions[activeIndex]}</p>
     )
 }
 

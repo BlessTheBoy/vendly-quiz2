@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import CarouselCaptions from "../CarouselCaptions";
 import CarouselImagesWrap from "../CarouselImagesWrap";
-import Indicators from "../Indicators";
+import CarouselIndicators from "../CarouselIndicators";
 import "./style.css";
 
 
@@ -29,7 +30,8 @@ function Carousel({carousel}) {
     return (
         <div className="carousel">
             <CarouselImagesWrap images={images} activeIndex={activeIndex} trigger={updateIndex}/>
-            <Indicators arr={images} activeIndex={activeIndex} trigger={updateIndex}/>
+            <CarouselIndicators arr={images} activeIndex={activeIndex} trigger={updateIndex}/>
+            <CarouselCaptions captions={captions} activeIndex={activeIndex} />
         </div>
     )
 }

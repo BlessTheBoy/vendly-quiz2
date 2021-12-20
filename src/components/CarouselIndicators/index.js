@@ -1,6 +1,6 @@
 import './style.css';
 
-function Indicators({arr, trigger, activeIndex}) {
+function CarouselIndicators({arr, trigger, activeIndex}) {
     return (
         <div className='indicators'>
             {arr.map((item, index) => <div key={index} className={`indicator ${index === activeIndex && "active"}`} onClick={() => trigger(index)}></div>)}
@@ -8,4 +8,4 @@ function Indicators({arr, trigger, activeIndex}) {
     )
 }
 
-export default Indicators
+export default CarouselIndicators
