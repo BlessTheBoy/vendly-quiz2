@@ -1,0 +1,22 @@
+.skin{
+    
+  background: url(../../assets/images/voucher.jpg) no-repeat top center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 2.75rem 1.125rem 2.0625rem;
+}
+
+.skin-container{
+    width: 100%;
+    max-width: 28rem;
+    background-color: white;
+    padding: var(--padding-mobile-reg) 0;
+    border: 1px solid var(--lemon);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    overflow-y: auto;
+    margin: 0 auto;
+    
+    /* margin: 2.75rem 1.125rem 2.0625rem; */
+   }
