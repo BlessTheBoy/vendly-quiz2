@@ -1,0 +1,8 @@
+.mainCarousel{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    column-gap: .5rem;
+    padding: 0 .2rem;
+  }

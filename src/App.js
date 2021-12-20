@@ -2,15 +2,17 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Skin from "./components/Skin";
 import Header from "./components/Header";
+import Carousel from "./components/Carousel";
 
 function App() {
   const [carouselList, setCarouselList] = useState([]);
+  const [questionIndex, setQuestionIndex] = useState(0);
 
   useEffect(() => {
     // Retrieve carousel items (images and questions)
     const data = [
       {
-        carosel: [
+        carousel: [
           {
             image: "carousel1.png",
             caption: "Livebridge helping people every Sunday.",
@@ -34,7 +36,7 @@ function App() {
         ],
       },
       {
-        carosel: [
+        carousel: [
           {
             image: "carousel1.png",
             caption: "Livebridge helping people every Sunday.",
@@ -59,15 +61,13 @@ function App() {
       },
     ];
     setCarouselList(data);
-    // setQuestions(data.map(item => item.questions))
-    // setImages(data.map(item => item.image))
-    // setCaptions(data.map(item => item.caption))
   }, []);
 
   return <div className="App">
     {carouselList ? 
       <Skin>
         <Header />
+        <Carousel carousel={carouselList[questionIndex]?.carousel}/>
       </Skin>
       : ""}
   </div>;
