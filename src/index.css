@@ -1,13 +1,65 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Variables */
+:root{
+  --lemon: #82ECD3;
+  --cyan: #006E72;
+  --padding-mobile-reg: 1rem;
+  --padding-mobile-med: 1.5rem;
 }
+
+
+/* Fonts */
+@font-face {
+  font-family: "AxiformaBook";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Book.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaLight";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaRegular";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaMedium";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Medium.ttf") format("truetype");
+   font-weight: normal;
+   font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaSemiBold";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-SemiBold.ttf") format("truetype");
+   font-weight: normal;
+   font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaBold";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Bold.ttf") format("truetype");
+   font-weight: normal;
+   font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaBlack";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Black.ttf") format("truetype");
+   font-weight: normal;
+   font-style: normal;
+  }
