@@ -11,6 +11,9 @@
   --padding-mobile-reg: 1rem;
   --padding-mobile-med: 1.5rem;
   --skin-height: 568px;
+  --button-lemon: #00E0BE;
+  --button-cyan: #006E72;
+  --scroll-bar: #17E7B3;
 }
 
 
@@ -54,6 +57,13 @@
   font-family: "AxiformaBold";
   src: local("Axiforma"),
    url("./assets/fonts/Axiforma/Axiforma-Bold.ttf") format("truetype");
+   font-weight: normal;
+   font-style: normal;
+  }
+@font-face {
+  font-family: "AxiformaExtraBold";
+  src: local("Axiforma"),
+   url("./assets/fonts/Axiforma/Axiforma-Extra*Bold.ttf") format("truetype");
    font-weight: normal;
    font-style: normal;
   }
