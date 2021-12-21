@@ -63,7 +63,7 @@
 @font-face {
   font-family: "AxiformaExtraBold";
   src: local("Axiforma"),
-   url("./assets/fonts/Axiforma/Axiforma-Extra*Bold.ttf") format("truetype");
+   url("./assets/fonts/Axiforma/Axiforma-ExtraBold.ttf") format("truetype");
    font-weight: normal;
    font-style: normal;
   }

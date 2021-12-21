@@ -19,32 +19,38 @@ function App() {
   const questionRef = useRef(null);
   const submitRef = useRef(null);
   const answersRef = useRef(null);
-  const skinRef = useRef(null);
+  const scrollRef = useRef(null);
 
   const handleScroll = () => {
-    const position = skinRef.current?.scrollTop;
+    const position = scrollRef.current?.scrollTop;
     if (position > 150) {
       setAnswerInView(true);
     } 
-    // console.log(position);
   };
 
   const scrollAnswerIntoView = () => {
-    console.log("scrollAnswerIntoView");
-    answersRef.current?.scrollIntoView(true);
+    scrollRef.current?.scrollTo(0, 500);
 
-    console.log("Scroll answer into view");
+    // console.log("Scroll answer into view");
+  };
+
+  const nextQuestion = () => {
+    setQuestionIndex(questionIndex + 1);
+    setQuestionCompleted(false);
+
+    console.log("nextQuestion");
   };
 
   const buttonClick = () => {
+    console.log("Button clicked")
     answerInView ? nextQuestion() : scrollAnswerIntoView();
   };
 
   useEffect(() => {
-    skinRef.current?.addEventListener("scroll", handleScroll);
+    scrollRef.current?.addEventListener("scroll", handleScroll);
 
     return () => {
-      skinRef.current?.removeEventListener("scroll", handleScroll);
+      scrollRef.current?.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -117,19 +123,14 @@ function App() {
     setCarouselList(newList);
   };
 
-  const nextQuestion = () => {
-    setQuestionIndex(questionIndex + 1);
-    setQuestionCompleted(false);
-
-    console.log("nextQuestion");
-  };
+  
 
   return (
     <div className="App">
       {carouselList ? (
         <Skin >
           <Header ref={headerRef} />
-          <div ref={skinRef} className="scroll">
+          <div ref={scrollRef} className="scroll">
             <p ref={instructionRef} className="header_instruction">
               Flip through the pictures to answer the question correctly.
             </p>

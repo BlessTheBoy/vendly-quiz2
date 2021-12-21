@@ -27,8 +27,8 @@ const InstructionModal = props => {
         <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="closeModal" onClick={props.onClose} >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" >
-<path d="M15 5L5 15" stroke="#007575" stroke-width="3" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M5 5L15 15" stroke="#007575" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 5L5 15" stroke="#007575" strokeWidth="3" strokeLinecap="square" strokeLinejoin="round"/>
+<path d="M5 5L15 15" stroke="#007575" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
             </div>
