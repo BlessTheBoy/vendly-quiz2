@@ -12,7 +12,6 @@ function App() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [questionCompleted, setQuestionCompleted] = useState(false)
   const [showModal, setShowModal] = useState(false)
-  const [skinHeight, setSkinHeight] = useState(0)
   const [answerInView, setAnswerInView] = useState(false)
   const headerRef = useRef(null)
   const instructionRef = useRef(null)
@@ -20,6 +19,32 @@ function App() {
   const questionRef = useRef(null)
   const submitRef = useRef(null)
   const answersRef = useRef(null)
+  const skinRef = useRef(null)
+
+
+  const handleScroll = () => {
+    const position = skinRef.current?.scrollTop;
+    if (position > 150) {
+      setAnswerInView(true)
+    } else{
+      setAnswerInView(false)
+    }
+    console.log(position)
+  };
+
+  const scrollAnswerIntoView = () => {
+    console.log("scrollAnswerIntoView")
+    answersRef.current?.scrollIntoView(true);
+  }
+
+  useEffect(() => {
+    skinRef.current?.addEventListener("scroll", handleScroll);
+
+    return () => {
+      skinRef.current?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 
 
   useEffect(() => {
@@ -84,35 +109,14 @@ function App() {
   
 //   }, [instructionRef])
 
-const callbackFuntion = (entries) => {
-  const [entry] = entries
-  setAnswerInView(entry.isIntersecting)
-  console.log(entry.isIntersecting)
-}
 
-const options = {
-  root: null,
-  rootMargin: "0px",
-  threshold: 0.3,
-}
-
-useEffect(() => {
-  const observer = new IntersectionObserver(callbackFuntion, options)
-  if (answersRef.current) {
-    observer.observe(answersRef.current)
-  }
-  return () => {
-    if (answersRef.current) {
-      observer.unobserve(answersRef.current)
-    }
-  }
-}, [answersRef, options])
 
   const addAnswer = (answer) => {
     const newList = [...carouselList];
     newList[questionIndex].answer = answer;
-    newList.every(question => question.every(item => item.answer !== undefined)) ? setQuestionCompleted(true) : setQuestionCompleted(false)
-    setCarouselList(newList)      
+    newList.every(list => list.answer !== undefined) ? setQuestionCompleted(true) : setQuestionCompleted(false)
+    setCarouselList(newList)
+    console.log(newList)  
   }
   
   const nextQuestion = () => {
@@ -122,14 +126,14 @@ useEffect(() => {
 
   return <div className="App">
     {carouselList ? 
-      <Skin height={skinHeight}>
+      <Skin ref={skinRef}>
         <Header ref={headerRef} />
         <p ref={instructionRef} className='header_instruction'>Flip through the pictures to answer the question correctly.</p>
         <Carousel ref={carouselRef} carousel={carouselList[questionIndex]?.carousel}/>
         <Question ref={questionRef} questionIndex={questionIndex + 1} question={carouselList[questionIndex]?.question} />
         <Answers ref={answersRef} options={carouselList[0]?.option} onAnswer={addAnswer} questionIndex={questionIndex} />
         <div className="submit" ref={submitRef}>
-        <button className={`button ${answerInView && "active"} `}  disabled={!questionCompleted} onClick={nextQuestion}>{answerInView? "Continue" : "Choose from Answers"}</button>
+        <button className={`button ${answerInView && "active"} `}  disabled={(!carouselList[questionIndex]?.answer)} onClick={() => answerInView ? nextQuestion : scrollAnswerIntoView}>{answerInView? "Continue" : "Choose from Answers"}</button>
         <p className="instructions">Read <span onClick={() => setShowModal(true)}>Instructions</span></p>
         <InstructionModal title="My Modal" onClose={() => setShowModal(false)} show={showModal} />
        </div>

@@ -11,7 +11,7 @@
     width: 100%;
     /* height: auto; */
     /* overflow-y: auto; */
-    /* height: 568px; */
+    height: var(--skin-height);
     max-width: 28rem;
     background-color: white;
     border: 1px solid var(--lemon);

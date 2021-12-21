@@ -1,14 +1,15 @@
+import { forwardRef } from "react";
 import "./style.css";
 
 
-function Skin({skinHeight = 568, children}) {
+const Skin = forwardRef(({ children}, ref) =>{
     return (
         <div className="skin">
-            <div className="skin-container" style={skinHeight && {height: `${skinHeight}px`}}>        
+            <div className="skin-container" ref={ref}>        
       {children}
     </div>
         </div>
     )
-}
+})
 
 export default Skin
