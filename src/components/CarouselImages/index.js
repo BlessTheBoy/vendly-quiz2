@@ -4,7 +4,7 @@ function CarouselImages({ images, activeIndex }) {
   return (
     <div className="imageCarousel">
       <div className="inner" style={{transform: `translateX(-${activeIndex * 100}%)`}}>
-      {images.map((image, index) => (
+      {images?.map((image, index) => (
         <div className="imageContainer" key={index}>
           <img src={require(`./../../assets/images/${image}`)} alt="" />
         </div>

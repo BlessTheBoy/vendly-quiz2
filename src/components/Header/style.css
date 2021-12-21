@@ -1,5 +1,9 @@
 .header{
-    padding: 1.25rem 1.625rem 1.375rem;
+    padding: 2.25rem 1.625rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: white;
 }
 
 .header_title{
@@ -17,6 +21,6 @@ font-style: normal;
 font-weight: normal;
 font-size: 0.6875rem;
 line-height: 1.636;
-padding: 0 0.3125rem;
+padding: 0 1.9375rem 1.375rem;
 color: #003333;
 }

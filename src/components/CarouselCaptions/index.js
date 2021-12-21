@@ -1,8 +1,8 @@
 import "./style.css";
 
-function CarouselCaptions({captions, activeIndex}) {
+function CarouselCaptions({captions, activeIndex=0}) {
     return (
-        <p className="carouselCaption">{captions[activeIndex]}</p>
+        captions?.length > 0 && <p className="carouselCaption">{captions[activeIndex]}</p>
     )
 }
 
