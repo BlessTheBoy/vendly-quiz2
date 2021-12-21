@@ -35,6 +35,8 @@ function App() {
   const scrollAnswerIntoView = () => {
     console.log("scrollAnswerIntoView")
     answersRef.current?.scrollIntoView(true);
+
+    console.log("Scroll answer into view")
   }
 
   useEffect(() => {
@@ -122,6 +124,8 @@ function App() {
   const nextQuestion = () => {
     setQuestionIndex(questionIndex + 1)
     setQuestionCompleted(false)
+
+    console.log("nextQuestion")
   }
 
   return <div className="App">
@@ -133,7 +137,7 @@ function App() {
         <Question ref={questionRef} questionIndex={questionIndex + 1} question={carouselList[questionIndex]?.question} />
         <Answers ref={answersRef} options={carouselList[0]?.option} onAnswer={addAnswer} questionIndex={questionIndex} />
         <div className="submit" ref={submitRef}>
-        <button className={`button ${answerInView && "active"} `}  disabled={(!carouselList[questionIndex]?.answer)} onClick={() => answerInView ? nextQuestion : scrollAnswerIntoView}>{answerInView? "Continue" : "Choose from Answers"}</button>
+        <button className={`button ${answerInView && "active"} `}  disabled={(answerInView && !carouselList[questionIndex]?.answer)} onClick={() => answerInView ? nextQuestion : scrollAnswerIntoView}>{answerInView? "Continue" : "Choose from Answers"}</button>
         <p className="instructions">Read <span onClick={() => setShowModal(true)}>Instructions</span></p>
         <InstructionModal title="My Modal" onClose={() => setShowModal(false)} show={showModal} />
        </div>
