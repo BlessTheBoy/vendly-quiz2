@@ -13,7 +13,7 @@
     .radio label{
         display: flex;
         align-items: flex-start;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1.875rem;
     }
 
     .radio:last-child, .radio:last-child label {
@@ -46,7 +46,7 @@
         height: 1rem;
         border-radius: 50%;
         border-style: solid;
-        border-width: 0.6px;
+        border-width: 1.5px;
         border-color: var(--cyan);
       }
       .radio > input[type="radio"]:checked + * {
@@ -55,5 +55,5 @@
       .radio > input[type="radio"]:checked + *::before {
         background: radial-gradient(var(--lemon) 0%, var(--lemon) 40%, transparent 50%, transparent);
         border-color: var(--lemon);        
-        border-width: 1.5px;
+        border-width: 2px; 
       }

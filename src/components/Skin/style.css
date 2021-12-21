@@ -2,23 +2,28 @@
   background: url(../../assets/images/voucher.jpg) no-repeat top center fixed;
   background-size: cover;
   min-height: 100vh;
-  padding: 2rem 1.125rem 5.5625rem;
+  padding: 2rem 0 5.5625rem;
   display: flex;
   align-items: flex-end;
 }
 
 .skin-container{
-    width: 100%;
-    /* height: auto; */
-    /* overflow-y: auto; */
+    width: 21.125rem;
     height: var(--skin-height);
-    max-width: 28rem;
     background-color: white;
     border: 1px solid var(--lemon);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     margin: 0 auto;
+    border-radius: 6px;
     
     /* margin: 2.75rem 1.125rem 2.0625rem; */
    }
+
+   @media screen and (min-height: 600px ) {
+    .skin{
+      height: 100vh;
+      padding-bottom: calc((100vh - 568px)*(3/5));
+    }
+  }

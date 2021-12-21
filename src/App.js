@@ -10,34 +10,35 @@ import InstructionModal from "./components/InstructionModal";
 function App() {
   const [carouselList, setCarouselList] = useState([]);
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [questionCompleted, setQuestionCompleted] = useState(false)
-  const [showModal, setShowModal] = useState(false)
-  const [answerInView, setAnswerInView] = useState(false)
-  const headerRef = useRef(null)
-  const instructionRef = useRef(null)
-  const carouselRef = useRef(null)
-  const questionRef = useRef(null)
-  const submitRef = useRef(null)
-  const answersRef = useRef(null)
-  const skinRef = useRef(null)
-
+  const [questionCompleted, setQuestionCompleted] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [answerInView, setAnswerInView] = useState(false);
+  const headerRef = useRef(null);
+  const instructionRef = useRef(null);
+  const carouselRef = useRef(null);
+  const questionRef = useRef(null);
+  const submitRef = useRef(null);
+  const answersRef = useRef(null);
+  const skinRef = useRef(null);
 
   const handleScroll = () => {
     const position = skinRef.current?.scrollTop;
     if (position > 150) {
-      setAnswerInView(true)
-    } else{
-      setAnswerInView(false)
-    }
-    console.log(position)
+      setAnswerInView(true);
+    } 
+    // console.log(position);
   };
 
   const scrollAnswerIntoView = () => {
-    console.log("scrollAnswerIntoView")
+    console.log("scrollAnswerIntoView");
     answersRef.current?.scrollIntoView(true);
 
-    console.log("Scroll answer into view")
-  }
+    console.log("Scroll answer into view");
+  };
+
+  const buttonClick = () => {
+    answerInView ? nextQuestion() : scrollAnswerIntoView();
+  };
 
   useEffect(() => {
     skinRef.current?.addEventListener("scroll", handleScroll);
@@ -46,8 +47,6 @@ function App() {
       skinRef.current?.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-
 
   useEffect(() => {
     // Retrieve carousel items (images and questions)
@@ -72,7 +71,6 @@ function App() {
           "Flip through the pictures to answer the question correctly.",
           "Five times",
           "Four times",
-          "Three times",
           "Two times",
         ],
       },
@@ -102,48 +100,78 @@ function App() {
       },
     ];
     setCarouselList(data);
+  }, []);
 
-    }, []);
+  //   useEffect(() => {
+  // // set height of skin
+  // carouselRef.current.clientHeight && setSkinHeight(instructionRef.current?.clientHeight + headerRef.current?.clientHeight + carouselRef.current?.clientHeight + questionRef?.current.clientHeight + submitRef.current?.clientHeight)
 
-//   useEffect(() => {
-// // set height of skin
-// carouselRef.current.clientHeight && setSkinHeight(instructionRef.current?.clientHeight + headerRef.current?.clientHeight + carouselRef.current?.clientHeight + questionRef?.current.clientHeight + submitRef.current?.clientHeight) 
-  
-//   }, [instructionRef])
-
-
+  //   }, [instructionRef])
 
   const addAnswer = (answer) => {
     const newList = [...carouselList];
     newList[questionIndex].answer = answer;
-    newList.every(list => list.answer !== undefined) ? setQuestionCompleted(true) : setQuestionCompleted(false)
-    setCarouselList(newList)
-    console.log(newList)  
-  }
-  
+    newList.every((list) => list.answer !== undefined)
+      ? setQuestionCompleted(true)
+      : setQuestionCompleted(false);
+    setCarouselList(newList);
+  };
+
   const nextQuestion = () => {
-    setQuestionIndex(questionIndex + 1)
-    setQuestionCompleted(false)
+    setQuestionIndex(questionIndex + 1);
+    setQuestionCompleted(false);
 
-    console.log("nextQuestion")
-  }
+    console.log("nextQuestion");
+  };
 
-  return <div className="App">
-    {carouselList ? 
-      <Skin ref={skinRef}>
-        <Header ref={headerRef} />
-        <p ref={instructionRef} className='header_instruction'>Flip through the pictures to answer the question correctly.</p>
-        <Carousel ref={carouselRef} carousel={carouselList[questionIndex]?.carousel}/>
-        <Question ref={questionRef} questionIndex={questionIndex + 1} question={carouselList[questionIndex]?.question} />
-        <Answers ref={answersRef} options={carouselList[0]?.option} onAnswer={addAnswer} questionIndex={questionIndex} />
-        <div className="submit" ref={submitRef}>
-        <button className={`button ${answerInView && "active"} `}  disabled={(answerInView && !carouselList[questionIndex]?.answer)} onClick={() => answerInView ? nextQuestion : scrollAnswerIntoView}>{answerInView? "Continue" : "Choose from Answers"}</button>
-        <p className="instructions">Read <span onClick={() => setShowModal(true)}>Instructions</span></p>
-        <InstructionModal title="My Modal" onClose={() => setShowModal(false)} show={showModal} />
-       </div>
-      </Skin>
-      : ""}
-  </div>;
+  return (
+    <div className="App">
+      {carouselList ? (
+        <Skin >
+          <Header ref={headerRef} />
+          <div ref={skinRef} className="scroll">
+            <p ref={instructionRef} className="header_instruction">
+              Flip through the pictures to answer the question correctly.
+            </p>
+            <Carousel
+              ref={carouselRef}
+              carousel={carouselList[questionIndex]?.carousel}
+            />
+            <Question
+              ref={questionRef}
+              questionIndex={questionIndex + 1}
+              question={carouselList[questionIndex]?.question}
+            />
+            <Answers
+              ref={answersRef}
+              options={carouselList[0]?.option}
+              onAnswer={addAnswer}
+              questionIndex={questionIndex}
+            />
+          </div>
+          <div className="submit" ref={submitRef}>
+            <button
+              className={`button arr ${answerInView && "active"} `}
+              disabled={answerInView && !carouselList[questionIndex]?.answer}
+              onClick={buttonClick}
+            >
+              {answerInView ? "Continue" : "Choose from Answers"}
+            </button>
+            <p className="instructions">
+              Read <span onClick={() => setShowModal(true)}>Instructions</span>
+            </p>
+            <InstructionModal
+              title="My Modal"
+              onClose={() => setShowModal(false)}
+              show={showModal}
+            />
+          </div>
+        </Skin>
+      ) : (
+        ""
+      )}
+    </div>
+  );
 }
 
 export default App;

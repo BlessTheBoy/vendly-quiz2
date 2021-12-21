@@ -2,6 +2,37 @@
   font-family: "Axiforma", sans-serif;
 }
 
+.scroll{
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-bar);    /* color of the scroll thumb */
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar);    /* color of the scroll thumb */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar);  
+  border-right: 3px solid #fff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--button-cyan);
+}
 
 .mainCarousel{
   display: flex;
@@ -51,7 +82,7 @@ color: #006E72;
   height: 45px;
   padding: .3rem .5rem;
   color: white;
-  background: var(--lemon);
+  background: var(--button-lemon);
   outline: none;
   border: none;
   font-family: "AxiformaBold", sans-serif;
@@ -67,18 +98,23 @@ transition: all 0.3s ease-in-out;
   background-color: rgba(155, 155, 155, 0.76);
   pointer-events: none;
 } */
-.button::after{
-  content: ">";
+.button.arr::after{
+  display: inline-flex;
+  content: '';
+  background-image: url('assets/vectors/arr-right.svg');
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  height: 12px;
+  width: 12px;
   position: absolute;
   top: 50%;
-  right: 2.3125rem;
+  right: 1.5rem;
   transform: translateY(-50%);
   opacity: 1;
-  transition: all 0.3s ease-in-out;
 }
 
 .button.active{
-  background: var(--cyan);
+  background: var(--button-cyan);
 }
 
 /* .button:hover, .button:focus{
