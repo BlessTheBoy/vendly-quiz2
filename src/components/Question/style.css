@@ -1,20 +1,20 @@
 .question{
     position: relative;
     font-family: "AxiformaBold", sans-serif;
-    padding: 21px var(--padding-mobile-med) 14px 0;
+    padding: 10px var(--padding-mobile-med) 14px 0;
     margin-left: 44px;
     font-style: normal;
     font-weight: normal;
 font-size: 0.90625rem;
 line-height: 1.655;
-height: 83px;
+/* height: 83px; */
 
     /* margin-bottom: 1rem; */
 }
 
 .question_marker{
     position: absolute;
-    top: 21px;
+    top: 10px;
     left: -1rem;
     color: var(--cyan);
     font-style: normal;

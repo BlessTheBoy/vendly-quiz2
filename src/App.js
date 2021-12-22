@@ -36,7 +36,8 @@ function App() {
 
   const nextQuestion = () => {
     setQuestionIndex(questionIndex + 1);
-    setQuestionCompleted(false);
+    setQuestionCompleted(false);    
+    scrollRef.current?.scrollTo(0, 0);
 
     console.log("nextQuestion");
   };
