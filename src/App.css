@@ -74,7 +74,7 @@ color: #006E72;
 }
 
 .submit .instructions span{  
-  font-family: "AxiformaSemiBold", sans-serif;
+  font-family: "AxiformaBold", sans-serif;
   color: var(--lemon);
   cursor: pointer;
 }

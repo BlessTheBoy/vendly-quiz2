@@ -1,5 +1,5 @@
 .question_options{
-    font-family: "AxiformaMedium", sans-serif;
+    font-family: "AxiformaSemiBold", sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 0.844rem;
@@ -7,13 +7,13 @@
     color: var(--cyan);
     min-height: 271px;
     height: 294px;
-    padding: 0.4375rem 3.5rem 0 2.625rem;
+    padding: 0.4375rem 1.625rem 0 2.625rem;
     }
     
     .radio label{
         display: flex;
         align-items: flex-start;
-        margin-bottom: 1.875rem;
+        margin-bottom: 2.1875rem;
     }
 
     .radio:last-child, .radio:last-child label {
@@ -31,6 +31,7 @@
     /* pretty radio */
     .radio label::before{       
         box-sizing: border-box;
+        margin-top: 1px;
         margin-right: 0.84375rem;
         flex-shrink: 0;
     }
@@ -50,10 +51,13 @@
         border-color: var(--cyan);
       }
       .radio > input[type="radio"]:checked + * {
-        color: teal;
+        color: var(--button-cyan);
       }
       .radio > input[type="radio"]:checked + *::before {
-        background: radial-gradient(var(--lemon) 0%, var(--lemon) 40%, transparent 50%, transparent);
-        border-color: var(--lemon);        
-        border-width: 2px; 
+        background: radial-gradient(var(--button-cyan) 0%, var(--button-cyan) 40%, transparent 50%, transparent);
+        border-color: var(--button-cyan);        
+        border-width: 2px;        
+        width: 1.1875rem;
+        height: 1.1875rem;
+        margin-right: 0.65625rem;
       }

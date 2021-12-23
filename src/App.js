@@ -34,16 +34,43 @@ function App() {
     // console.log("Scroll answer into view");
   };
 
-  const nextQuestion = () => {
-    setQuestionIndex(questionIndex + 1);
-    setQuestionCompleted(false);    
-    scrollRef.current?.scrollTo(0, 0);
+  async function nextQuestion () {
+    questionIndex < carouselList.length - 1 && setQuestionIndex(questionIndex + 1)
+    await scrollTo(scrollRef, 0).then(() => {
+      console.log("Promise resolved")
+      setAnswerInView(false)
+    }).catch(() => console.log("Promise failed"))
 
     console.log("nextQuestion");
   };
 
+  function scrollTo (elementRef, offset = 0) {
+    elementRef.current?.scrollTo(0, offset);
+    
+    return new Promise((resolve, reject) => {
+      const failed = setTimeout(() => {
+        reject();
+      }, 2000);
+  
+      const scrollHandler = () => {
+        if (elementRef.current?.scrollTop === offset) {
+          elementRef.current?.removeEventListener("scroll", scrollHandler);
+          clearTimeout(failed);
+          resolve();
+        }
+      };
+      if (elementRef.current?.scrollTop === offset) {
+        clearTimeout(failed);
+        resolve();
+      } else {
+        elementRef.current?.addEventListener("scroll", scrollHandler);
+      }
+    });
+  }
+
   const buttonClick = () => {
     console.log("Button clicked")
+    if (questionCompleted)  return 
     answerInView ? nextQuestion() : scrollAnswerIntoView();
   };
 
@@ -84,25 +111,24 @@ function App() {
       {
         carousel: [
           {
-            image: "carousel1.png",
-            caption: "Livebridge helping people every Sunday.",
-          },
-          {
-            image: "carousel2.png",
-            caption: "Livebridhe helping people every Sunday.",
-          },
-          {
             image: "carousel3.png",
             caption: "Founders of Livebridge",
           },
+          {
+            image: "carousel1.png",
+            caption: "Livebridhe helping people every Sunday.",
+          },
+          {
+            image: "carousel2.png",
+            caption: "Livebridge helping people every Sunday.",
+          },
         ],
-        question: "How many times has Vendly been redesigned?",
+        question: "Who is the C.E.O of Vendly?",
         option: [
-          "Flip through the pictures to answer the question correctly.",
-          "Five times",
-          "Four times",
-          "Three times",
-          "Two times",
+          "Martha Johnson",
+          "Bob Nzelu",
+          "Joseph Emmanuel",
+          "Claire Vincee",
         ],
       },
     ];
@@ -116,6 +142,11 @@ function App() {
 
     }, [carouselList[questionIndex]?.answer])
 
+    useEffect(() => {
+      document.documentElement.style.setProperty('--questionHeight', questionRef.current?.clientHeight);
+      console.log(questionRef.current?.clientHeight)
+    }, [questionRef.current?.clientHeight])
+
   const addAnswer = (answer) => {
     const newList = [...carouselList];
     newList[questionIndex].answer = answer;
@@ -123,6 +154,7 @@ function App() {
       ? setQuestionCompleted(true)
       : setQuestionCompleted(false);
     setCarouselList(newList);
+    console.log(newList)
   };
 
   
@@ -147,7 +179,7 @@ function App() {
             />
             <Answers
               ref={answersRef}
-              options={carouselList[0]?.option}
+              options={carouselList[questionIndex]?.option}
               onAnswer={addAnswer}
               questionIndex={questionIndex}
             />
@@ -158,7 +190,7 @@ function App() {
               disabled={answerInView && !carouselList[questionIndex]?.answer}
               onClick={buttonClick}
             >
-              {answerInView ? "Continue" : "Choose from Answers"}
+              {questionCompleted ? "Submit" : (answerInView ? "Continue" : "Choose from Answers")}
             </button>
             <p className="instructions">
               Read <span onClick={() => setShowModal(true)}>Instructions</span>
