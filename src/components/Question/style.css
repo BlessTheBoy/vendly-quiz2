@@ -7,7 +7,8 @@
     font-weight: normal;
 font-size: 0.90625rem;
 line-height: 1.655;
-/* height: 83px; */
+display: flex;
+height: 72px;
 
     /* margin-bottom: 1rem; */
 }

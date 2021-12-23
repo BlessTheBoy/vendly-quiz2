@@ -21,8 +21,8 @@ font-style: normal;
 font-weight: normal;
 font-size: 0.6875rem;
 line-height: 1.636;
-padding: 0 1.9375rem 1.375rem;
+padding: 12px 1.9375rem 1.375rem;
 color: #003333;
-height: 58px;
-margin-top: 12px;
+height: 70px;
+/* margin-top: 12px; */
 }

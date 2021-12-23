@@ -23,7 +23,7 @@ function App() {
 
   const handleScroll = () => {
     const position = scrollRef.current?.scrollTop;
-    if (position > 150) {
+    if (position > 180) {
       setAnswerInView(true);
     } 
   };
@@ -109,11 +109,12 @@ function App() {
     setCarouselList(data);
   }, []);
 
-  //   useEffect(() => {
-  // // set height of skin
-  // carouselRef.current.clientHeight && setSkinHeight(instructionRef.current?.clientHeight + headerRef.current?.clientHeight + carouselRef.current?.clientHeight + questionRef?.current.clientHeight + submitRef.current?.clientHeight)
+    useEffect(() => {
+  if (!answerInView && carouselList[questionIndex]?.answer) {
+    scrollAnswerIntoView()
+  }
 
-  //   }, [instructionRef])
+    }, [carouselList[questionIndex]?.answer])
 
   const addAnswer = (answer) => {
     const newList = [...carouselList];
