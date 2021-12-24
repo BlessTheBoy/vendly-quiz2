@@ -22,16 +22,6 @@ function App() {
   const answersRef = useRef(null);
   const scrollRef = useRef(null);
 
-  // Set answer in view
-  // const handleScroll = () => {
-  //   const position = scrollRef.current?.scrollTop;
-  //   if (position > 180 && !carouselList[questionIndex].answerInView) {
-  //     let list = [...carouselList];
-  //     list[questionIndex].answerInView = true
-  //     setCarouselList(list)
-  //   } 
-  // };
-
 // Scroll answer into view
   const scrollAnswerIntoView = () => {
     let newList = [...carouselList];
@@ -85,19 +75,6 @@ function App() {
     carouselList[questionIndex].answerInView ? updateQuestion(questionIndex + 1) : scrollAnswerIntoView();
   };
 
-  // useEffect(() => {
-  //   scrollRef.current?.addEventListener("scroll", () => {
-  //     const position = scrollRef.current?.scrollTop;
-  //     if (position > 180 && !carouselList[questionIndex].answerInView) {
-  //       let list = [...carouselList];
-  //       list[questionIndex].answerInView = true
-  //       setCarouselList(list)
-  //       console.log("Scroll position", position)
-  //     }
-  //   })
-     
-  // }, []);
-
   useEffect(() => {
     // Retrieve carousel items (images and questions)
     const data = [
@@ -150,6 +127,23 @@ function App() {
     ];
     setCarouselList(data);
   }, []);
+
+  useEffect(() => {
+    const handlescroll = () => {
+      const position = scrollRef.current?.scrollTop;
+      if (position > 180 && !carouselList[questionIndex]?.answerInView) {
+        let list = [...carouselList];
+        list[questionIndex].answerInView = true
+        setCarouselList(list)
+        console.log("Scroll position", position)
+      }}
+      scrollRef.current?.addEventListener("scroll", handlescroll)
+    return () => {
+      scrollRef.current?.removeEventListener("scroll", handlescroll)
+    }
+  }, [carouselList])
+
+  
 
   // Scroll answer into view on answer selected
     useEffect(() => {
