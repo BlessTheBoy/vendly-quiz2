@@ -13,7 +13,7 @@ function App() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [questionCompleted, setQuestionCompleted] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [answerInView, setAnswerInView] = useState(false);
+  // const [answerInView, setAnswerInView] = useState(false);
   const headerRef = useRef(null);
   const instructionRef = useRef(null);
   const carouselRef = useRef(null);
@@ -22,35 +22,39 @@ function App() {
   const answersRef = useRef(null);
   const scrollRef = useRef(null);
 
-  const handleScroll = () => {
-    const position = scrollRef.current?.scrollTop;
-    if (position > 180) {
-      setAnswerInView(true);
-    } 
-  };
+  // Set answer in view
+  // const handleScroll = () => {
+  //   const position = scrollRef.current?.scrollTop;
+  //   if (position > 180 && !carouselList[questionIndex].answerInView) {
+  //     let list = [...carouselList];
+  //     list[questionIndex].answerInView = true
+  //     setCarouselList(list)
+  //   } 
+  // };
 
+// Scroll answer into view
   const scrollAnswerIntoView = () => {
     scrollRef.current?.scrollTo(0, 500);
-
-    // console.log("Scroll answer into view");
   };
 
-  async function updateQuestion (index) {
-    index < carouselList.length && setQuestionIndex(index)
-    if (!carouselList[index].viewed) {
-      await scrollTo(scrollRef, 0).then(() => {
-        console.log("Promise resolved")
-        setAnswerInView(false)
-      }).catch(() => console.log("Promise failed"))
-    } else {
-      carouselList[index].viewed = true
-    }
 
-    console.log("nextQuestion");
+  async function updateQuestion (index) {
+    let newList = [...carouselList];
+    newList[index].viewed = true;
+    index < carouselList.length && setQuestionIndex(index)
+    if (!newList[index].answerInView) {
+      await scrollTo(scrollRef, 0).catch(() => console.log("Promise failed")).then(() => {
+        newList[index].answerInView = false
+      })
+    }
+    
+    setCarouselList(newList);
+    console.log(`Question ${index} is viewed: ${carouselList[index].viewed}`)
   };
 
   function scrollTo (elementRef, offset = 0) {
     elementRef.current?.scrollTo(0, offset);
+    console.log("Scroll to top");
     
     return new Promise((resolve, reject) => {
       const failed = setTimeout(() => {
@@ -76,16 +80,17 @@ function App() {
   const buttonClick = () => {
     console.log("Button clicked")
     if (questionCompleted)  return 
-    answerInView ? updateQuestion(questionIndex + 1) : scrollAnswerIntoView();
+    carouselList[questionIndex].answerInView ? updateQuestion(questionIndex + 1) : scrollAnswerIntoView();
   };
 
   useEffect(() => {
-    scrollRef.current?.addEventListener("scroll", handleScroll);
-
-    return () => {
-      scrollRef.current?.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    const position = scrollRef.current?.scrollTop;
+    if (position > 180 && !carouselList[questionIndex].answerInView) {
+      let list = [...carouselList];
+      list[questionIndex].answerInView = true
+      setCarouselList(list)
+    } 
+  }, [scrollRef.current?.scrollTop]);
 
   useEffect(() => {
     // Retrieve carousel items (images and questions)
@@ -112,7 +117,6 @@ function App() {
           "Four times",
           "Two times",
         ],
-        answer: "Five times",
       },
       {
         carousel: [
@@ -141,8 +145,9 @@ function App() {
     setCarouselList(data);
   }, []);
 
+  // Scroll answer into view on answer selected
     useEffect(() => {
-  if (!answerInView && carouselList[questionIndex]?.answer) {
+  if (!carouselList[questionIndex]?.answerInView && carouselList[questionIndex]?.answer) {
     scrollAnswerIntoView()
   }
 
@@ -190,11 +195,11 @@ function App() {
           </div>
           <div className="submit" ref={submitRef}>
             <button
-              className={`button arr ${answerInView && "active"} `}
-              disabled={answerInView && !carouselList[questionIndex]?.answer}
+              className={`button arr ${carouselList[questionIndex]?.answerInView && "active"} `}
+              disabled={carouselList[questionIndex]?.answerInView && !carouselList[questionIndex]?.answer}
               onClick={buttonClick}
             >
-              {questionCompleted ? "Submit" : (answerInView ? "Continue" : "Choose from Answers")}
+              {questionCompleted ? "Submit" : (carouselList[questionIndex]?.answerInView ? "Continue" : "Choose from Answers")}
             </button>
             <p className="instructions">
               Read <span onClick={() => setShowModal(true)}>Instructions</span>
