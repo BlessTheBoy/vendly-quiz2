@@ -9,6 +9,7 @@ import { useSwipeable } from 'react-swipeable';
 const Carousel = forwardRef(({carousel}, ref) => {
   const [images, setImages] = useState([])
   const [captions, setCaptions] = useState([])
+  const [paused, setPaused] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
 
 
@@ -17,12 +18,25 @@ const Carousel = forwardRef(({carousel}, ref) => {
       setCaptions(carousel?.map(item => item.caption))
   }, [carousel])
 
+useEffect(() => {
+  const interval = setInterval(() => {
+    if (!paused) {
+      updateIndex(activeIndex + 1)
+    }
+  }, 1500)
+  return () => {
+    if (interval) {
+      clearInterval(interval);
+    }
+  }
+})
+
 
   const updateIndex = (index) => {
       if (index < 0) {
-        index = 0;
-      } else if (index > images.length - 1) {
         index = images.length - 1;
+      } else if (index > images.length - 1) {
+        index = 0;
       }
 
       setActiveIndex(index)
@@ -34,7 +48,7 @@ const Carousel = forwardRef(({carousel}, ref) => {
     })
 
   return (
-      <div className="carousel" ref={ref} {...handlers}>
+      <div className="carousel" ref={ref} {...handlers} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
           <CarouselImagesWrap images={images} activeIndex={activeIndex} trigger={updateIndex}/>
           <CarouselIndicators arr={images} activeIndex={activeIndex} trigger={updateIndex}/>
           <CarouselCaptions captions={captions} activeIndex={activeIndex} />
