@@ -6,6 +6,7 @@ import Carousel from "./components/Carousel";
 import Question from "./components/Question";
 import Answers from "./components/Answers";
 import InstructionModal from "./components/InstructionModal";
+import QuestionIndicators from "./components/QuestionIndicators";
 
 function App() {
   const [carouselList, setCarouselList] = useState([]);
@@ -34,12 +35,16 @@ function App() {
     // console.log("Scroll answer into view");
   };
 
-  async function nextQuestion () {
-    questionIndex < carouselList.length - 1 && setQuestionIndex(questionIndex + 1)
-    await scrollTo(scrollRef, 0).then(() => {
-      console.log("Promise resolved")
-      setAnswerInView(false)
-    }).catch(() => console.log("Promise failed"))
+  async function updateQuestion (index) {
+    index < carouselList.length && setQuestionIndex(index)
+    if (!carouselList[index].viewed) {
+      await scrollTo(scrollRef, 0).then(() => {
+        console.log("Promise resolved")
+        setAnswerInView(false)
+      }).catch(() => console.log("Promise failed"))
+    } else {
+      carouselList[index].viewed = true
+    }
 
     console.log("nextQuestion");
   };
@@ -71,7 +76,7 @@ function App() {
   const buttonClick = () => {
     console.log("Button clicked")
     if (questionCompleted)  return 
-    answerInView ? nextQuestion() : scrollAnswerIntoView();
+    answerInView ? updateQuestion(questionIndex + 1) : scrollAnswerIntoView();
   };
 
   useEffect(() => {
@@ -107,6 +112,7 @@ function App() {
           "Four times",
           "Two times",
         ],
+        answer: "Five times",
       },
       {
         carousel: [
@@ -142,13 +148,9 @@ function App() {
 
     }, [carouselList[questionIndex]?.answer])
 
-    useEffect(() => {
-      document.documentElement.style.setProperty('--questionHeight', questionRef.current?.clientHeight);
-      console.log(questionRef.current?.clientHeight)
-    }, [questionRef.current?.clientHeight])
 
   const addAnswer = (answer) => {
-    const newList = [...carouselList];
+    let newList = [...carouselList];
     newList[questionIndex].answer = answer;
     newList.every((list) => list.answer !== undefined)
       ? setQuestionCompleted(true)
@@ -163,6 +165,7 @@ function App() {
     <div className="App">
       {carouselList ? (
         <Skin >
+          <QuestionIndicators active={questionIndex} list={carouselList} trigger={updateQuestion}/>
           <Header ref={headerRef} />
           <div ref={scrollRef} className="scroll">
             <p ref={instructionRef} className="header_instruction">
@@ -182,6 +185,7 @@ function App() {
               options={carouselList[questionIndex]?.option}
               onAnswer={addAnswer}
               questionIndex={questionIndex}
+              answer={carouselList[questionIndex]?.answer}
             />
           </div>
           <div className="submit" ref={submitRef}>

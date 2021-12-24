@@ -12,6 +12,7 @@
     height: 0.3125rem;
     border-radius: 50%;
     background-color: var(--lemon);
+    cursor: pointer;
 }
 
 .indicator.active{

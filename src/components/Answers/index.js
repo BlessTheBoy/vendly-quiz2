@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import "./style.css";
 
 
-const Answers = forwardRef(({questionIndex, options, onAnswer}, ref) => {
+const Answers = forwardRef(({questionIndex, options, onAnswer, answer}, ref) => {
     return (
         <div ref={ref} className="question_options">
       {options?.map((item, index) => (
@@ -13,6 +13,7 @@ const Answers = forwardRef(({questionIndex, options, onAnswer}, ref) => {
                 name={questionIndex}
                 id={`${questionIndex}${item}`}
                 onChange={() => onAnswer(item)}
+                checked={answer === item}
               />
             <label htmlFor={`${questionIndex}${item}`} >              
               {item}
