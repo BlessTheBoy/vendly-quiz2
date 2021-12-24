@@ -3,16 +3,14 @@
 }
 
 .scroll{
-  height: 366px;
+  height: 352px;
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--scroll-bar);    /* color of the scroll thumb */
-}
-::-webkit-scrollbar-thumb {
-  background: var(--scroll-bar);    /* color of the scroll thumb */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 /* width */
@@ -68,14 +66,14 @@ color: var(--cyan);
 .submit .instructions{
   font-family: "AxiformaMedium", sans-serif;
   font-weight: normal;
-font-size: 0.75rem;
+font-size: 0.76rem;
 line-height: 1.58;
 color: #006E72;
 }
 
 .submit .instructions span{  
   font-family: "AxiformaBold", sans-serif;
-  color: var(--lemon);
+  color: var(--button-lemon);
   cursor: pointer;
 }
 

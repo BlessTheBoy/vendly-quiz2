@@ -2,9 +2,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1.25rem var(--padding-mobile-med) 0.5625rem;
+    /* padding: 1.25rem var(--padding-mobile-med) 0.5625rem; */
+    padding: 0;
     column-gap: 0.34375rem;
-    height: 34px;
+    height: 20px;
 }
 
 .indicator{

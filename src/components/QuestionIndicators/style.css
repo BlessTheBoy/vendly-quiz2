@@ -6,11 +6,11 @@
 }
 
 .questionIndicator{
-    width: 20px;
-    height: 5px;
-    border-radius: 5px;
+    width: 30px;
+    height: 4.9px;
+    border-radius: 2px;
     background-color: var(--scroll-bar);
-    margin-left: 5px;
+    margin-left: 13px;
     cursor: pointer;
 }
 
