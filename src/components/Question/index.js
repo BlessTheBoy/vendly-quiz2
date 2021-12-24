@@ -5,7 +5,7 @@ const Question = forwardRef(({ question, questionIndex }, ref) => {
   const questionRef = useRef(null)
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--question-height',  `${(366 - questionRef.current?.clientHeight)}px`);
+    document.documentElement.style.setProperty('--question-height',  `${(352 - questionRef.current?.clientHeight)}px`);
     console.log("Question Height:", questionRef.current?.clientHeight)
   }, [question])
 
