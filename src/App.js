@@ -34,7 +34,10 @@ function App() {
 
 // Scroll answer into view
   const scrollAnswerIntoView = () => {
-    scrollRef.current?.scrollTo(0, 500);
+    let newList = [...carouselList];
+    scrollRef.current?.scrollTo(0, 500)
+    newList[questionIndex].answerInView = true
+    setCarouselList(newList)
   };
 
 
@@ -63,7 +66,6 @@ function App() {
   
       const scrollHandler = () => {
         if (elementRef.current?.scrollTop === offset) {
-          elementRef.current?.removeEventListener("scroll", scrollHandler);
           clearTimeout(failed);
           resolve();
         }
@@ -83,14 +85,18 @@ function App() {
     carouselList[questionIndex].answerInView ? updateQuestion(questionIndex + 1) : scrollAnswerIntoView();
   };
 
-  useEffect(() => {
-    const position = scrollRef.current?.scrollTop;
-    if (position > 180 && !carouselList[questionIndex].answerInView) {
-      let list = [...carouselList];
-      list[questionIndex].answerInView = true
-      setCarouselList(list)
-    } 
-  }, [scrollRef.current?.scrollTop]);
+  // useEffect(() => {
+  //   scrollRef.current?.addEventListener("scroll", () => {
+  //     const position = scrollRef.current?.scrollTop;
+  //     if (position > 180 && !carouselList[questionIndex].answerInView) {
+  //       let list = [...carouselList];
+  //       list[questionIndex].answerInView = true
+  //       setCarouselList(list)
+  //       console.log("Scroll position", position)
+  //     }
+  //   })
+     
+  // }, []);
 
   useEffect(() => {
     // Retrieve carousel items (images and questions)
@@ -195,7 +201,7 @@ function App() {
           </div>
           <div className="submit" ref={submitRef}>
             <button
-              className={`button arr ${carouselList[questionIndex]?.answerInView && "active"} `}
+              className={`button arr ${(questionCompleted || carouselList[questionIndex]?.answerInView) && "active"} `}
               disabled={carouselList[questionIndex]?.answerInView && !carouselList[questionIndex]?.answer}
               onClick={buttonClick}
             >
