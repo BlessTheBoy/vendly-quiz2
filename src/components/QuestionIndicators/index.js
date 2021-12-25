@@ -4,18 +4,7 @@ import "./style.css";
 function QuestionIndicators({active, list, trigger}) {
     return (
         <div className="questionIndicators">
-            {list.map((item, index) => {
-              if (index === active) {
-                return (
-                  <div className="questionIndicator active" key={index} onClick={() => trigger(index)}></div>
-                );
-              } else {
-                return (
-                  <div className="questionIndicator" key={index}onClick={() => trigger(index)}></div>
-                );
-              }
-                
-              })
+            {list.map((item, index) => <div className={`questionIndicator ${index === active && "active"} ${!item.viewed && "unVisited"}`} key={index} onClick={() => trigger(index)}></div>)
             }
           </div>
     )

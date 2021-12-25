@@ -125,6 +125,8 @@ function App() {
         ],
       },
     ];
+    data[0].viewed = true
+    console.log(data)
     setCarouselList(data);
   }, []);
 
