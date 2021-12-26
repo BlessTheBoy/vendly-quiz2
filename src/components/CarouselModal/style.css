@@ -35,7 +35,7 @@ font-style: normal;
 font-weight: normal;
 font-size: 0.8125rem;
 line-height: 1.615;
-padding: .8rem .35rem;
+padding: .5rem .35rem .8rem;
 
     transition: all 0.3s ease-in-out;
     /* transform: translateY(200px); */
@@ -52,7 +52,7 @@ padding: .8rem .35rem;
   }
   
   .carouselModal-header {
-    padding: 0 .8rem .2rem;
+    padding: 0 .5rem .2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -99,9 +99,9 @@ padding: 2.8125rem 1.5rem 3.6875rem;
     transform: translateY(-50%);
     cursor: pointer;
   }
-  .carouselModal-body .leftArr svg{
+  /* .carouselModal-body .leftArr svg{
     width: .75rem;
-  }
+  } */
   .carouselModal-body .leftArr svg .str0 {
     stroke:#00D0BE;
     stroke-width:0.41;
@@ -120,9 +120,9 @@ padding: 2.8125rem 1.5rem 3.6875rem;
     cursor: pointer;
   }
 
-  .carouselModal-body .rightArr svg{
+  /* .carouselModal-body .rightArr svg{
     width: .75rem;
-  }
+  } */
 
   .carouselModal-body .rightArr svg .str0 {stroke:#00D0BE;stroke-width:40;stroke-miterlimit:22.9256}
   
