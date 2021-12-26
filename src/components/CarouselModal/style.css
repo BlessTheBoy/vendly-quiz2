@@ -87,7 +87,7 @@ padding: 2.8125rem 1.5rem 3.6875rem;
   .carouselModal-body img{
     object-fit: contain;
     width: 100%;
-    border: 1px solid var(--lemon);
+    border: 1px solid var(--button-lemon);
     /* height: 191px; */
   }
 
