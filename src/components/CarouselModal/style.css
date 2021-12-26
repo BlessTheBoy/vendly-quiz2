@@ -25,7 +25,7 @@
   
   .carouselModal-content {
       position: relative;
-      width: 84%;
+      width: 98%;
     max-width: 500px;
     background-color: #E0FAF8;
     color: var(--cyan);
@@ -38,6 +38,7 @@ padding: .8rem .5rem;
 
     transition: all 0.3s ease-in-out;
     /* transform: translateY(200px); */
+    border: 1px solid var(--lemon);
     border-radius: 7px;
   }
 
@@ -50,7 +51,7 @@ padding: .8rem .5rem;
   }
   
   .carouselModal-header {
-    padding: 0 .8rem .5rem;
+    padding: 0 .8rem .2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +60,6 @@ font-style: normal;
 font-weight: normal;
 font-size: .6rem;
 line-height: 1.667;
-color: var(--button-lemon);
   }
 
   .carouselModal-header .closeModal{
@@ -81,41 +81,50 @@ padding: 2.8125rem 1.5rem 3.6875rem;
     /* padding: 0 30px; */
     position: relative;
   }
-
+  
   .carouselModal-body img{
     object-fit: contain;
     width: 100%;
-    height: 191px;
+    border: 1px solid var(--lemon);
+    /* height: 191px; */
   }
 
-  .carouselModal-body .leftArrow, .carouselModal-body .rightArrow {
-    background-color: rgba(235, 235, 235, 0.39);
-  }
-  .carouselModal-body .leftArrow svg, .carouselModal-body .rightArrow svg{
-    fill: white;
-  }
-
-  .carouselModal-body .leftArrow{
+  .carouselModal-body .leftArr{
     position: absolute;
     z-index: 1;
     top: 50%;
-    left: .3rem;
+    left: .4rem;
     transform: translateY(-50%);
+    cursor: pointer;
   }
-  .carouselModal-body .rightArrow{
+  .carouselModal-body .leftArr svg .str0 {
+    stroke:#00D0BE;
+    stroke-width:0.41;
+    stroke-miterlimit:22.9256
+  }
+  
+  .carouselModal-body .leftArr svg .fil0 {fill:white;fill-rule:nonzero}
+
+
+  .carouselModal-body .rightArr{
     position: absolute;
     z-index: 1;
     top: 50%;
-    right: .3rem;
+    right: .4rem;
     transform: translateY(-50%);
+    cursor: pointer;
   }
+
+  .carouselModal-body .rightArr svg .str0 {stroke:#00D0BE;stroke-width:40;stroke-miterlimit:22.9256}
+  
+  .carouselModal-body .rightArr svg .fil0 {fill:white;fill-rule:nonzero}
 
   .carouselModal-caption{
     text-align: center;
     font-family: "AxiformaMedium", sans-serif;
   font-weight: normal;
   font-style: normal;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   line-height: 1.5;
   color: var(--cyan);
   padding: .2rem 0;

@@ -6,6 +6,7 @@
     height: 162px;
     overflow: hidden;
     width: 256px;
+    cursor: pointer;
 }
 
 .imageCarousel .inner{
