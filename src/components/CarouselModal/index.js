@@ -74,7 +74,7 @@ const CarouselModal = ({ activeIndex, onClose, carousel, show, trigger }) => {
                 <g id="Layer_x0020_1">
                   <metadata id="CorelCorpID_0Corel-Layer" />
                   <polygon
-                    class="fil0 str0"
+                    className="fil0 str0"
                     points="7.08,0.29 8.25,1.46 2.64,7.06 8.25,12.66 7.08,13.84 0.29,7.06 "
                   />
                 </g>
@@ -100,7 +100,7 @@ const CarouselModal = ({ activeIndex, onClose, carousel, show, trigger }) => {
 viewBox="0 0 837.32 1385.15">
  <g id="Layer_x0020_1">
   <metadata id="CorelCorpID_0Corel-Layer"/>
-  <polygon class="fil0 str0" points="143.46,1356.87 28.3,1241.53 578.31,692.58 28.3,143.64 143.46,28.28 809.02,692.58 "/>
+  <polygon className="fil0 str0" points="143.46,1356.87 28.3,1241.53 578.31,692.58 28.3,143.64 143.46,28.28 809.02,692.58 "/>
  </g>
 </svg>
             </div>
