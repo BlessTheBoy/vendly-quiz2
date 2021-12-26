@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useSwipeable } from "react-swipeable";
 import { CSSTransition } from "react-transition-group";
 import LeftArrow from "../LeftArrow";
 import RightArrow from "../RightArrow";
@@ -19,10 +20,15 @@ const CarouselModal = ({ activeIndex, onClose, carousel, show, trigger }) => {
     };
   }, []);
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => trigger(activeIndex + 1),
+    onSwipedRight: () => trigger(activeIndex - 1)
+  })
+
   return ReactDOM.createPortal(
     <CSSTransition in={show} unmountOnExit timeout={{ enter: 0, exit: 300 }}>
-      <div className="modal" onClick={onClose}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="carouselModal" onClick={onClose}>
+        <div className="carouselModal-content" onClick={(e) => e.stopPropagation()}>
           <div className="carouselModal-header">
             <p className="carouselModal-indicator">{`${activeIndex + 1}/${
               carousel?.length
@@ -47,7 +53,7 @@ const CarouselModal = ({ activeIndex, onClose, carousel, show, trigger }) => {
               </svg>
             </div>
           </div>
-          <div className="carousalModal-body">
+          <div className="carouselModal-body" {...handlers} >
             <LeftArrow trigger={trigger} activeIndex={activeIndex} />
             {carousel ? (
               <img
