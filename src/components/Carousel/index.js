@@ -23,7 +23,7 @@ useEffect(() => {
     if (!paused) {
       updateIndex(activeIndex + 1)
     }
-  }, 10000)
+  }, 1000)
   return () => {
     if (interval) {
       clearInterval(interval);
@@ -48,8 +48,8 @@ useEffect(() => {
     })
 
   return (
-      <div className="carousel" ref={ref} {...handlers} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-          <CarouselImagesWrap images={images} activeIndex={activeIndex} trigger={updateIndex}/>
+      <div className="carousel" ref={ref} {...handlers} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(false)}>
+          <CarouselImagesWrap images={carousel} activeIndex={activeIndex} trigger={updateIndex} paused={setPaused} />
           <CarouselIndicators arr={images} activeIndex={activeIndex} trigger={updateIndex}/>
           <CarouselCaptions captions={captions} activeIndex={activeIndex} />
       </div>
