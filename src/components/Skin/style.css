@@ -25,6 +25,6 @@
    @media screen and (min-height: 600px ) {
     .skin{
       height: 100vh;
-      padding-bottom: calc((100vh - 559px)*(3/5));
+      padding-bottom: calc((100vh - 545px)*(3/5));
     }
   }
